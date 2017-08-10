@@ -1,32 +1,39 @@
-import paramiko
-import csv
+import paramiko, os, csv, glob
 
 paramiko.util.log_to_file('/tmp/paramiko.log')
 
 # Open a transport
 
-host = "dragoncave8.ddns.net"
-port = 1888
+host = "37.48.119.251"
+port = 2222
 transport = paramiko.Transport((host, port))
 
 # Auth
 
-password = "dragon1991!"
-username = "retsu"
+username = "user"
+password = "2ebc42dc4e"
 transport.connect(username = username, password = password)
 
 # Go!
 
 sftp = paramiko.SFTPClient.from_transport(transport)
 
-data = sftp.listdir('/mnt/Media/Movies')
+data = sftp.listdir('Downloads')
 
-print(data)
 # Download
 
-#filepath = '/etc/passwd'
-#localpath = '/home/remotepasswd'
-#sftp.get(filepath, localpath)
+os.chdir("/home/retsu/Downloads")
+filepath = "/home/retsu/Downloads/"
+for file in os.listdir(filepath):
+    name, ext = os.path.splitext(file)
+    if ext == '.torrent':
+        print('Moving torrent '+file+' into Downloads')
+        start = os.path.join(filepath, file)
+        finish = os.path.join('Downloads/', file)
+        print(start)
+        sftp.put(start, finish)
+        print('Now Deleting '+file)
+        os.remove(file)
 
 # Close
 
