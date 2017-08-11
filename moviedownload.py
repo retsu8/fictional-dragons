@@ -36,7 +36,10 @@ def printTotals(transferred, toBeTransferred):
 
 def match(matching):
     for item in matching:
-        print ia.search_keyword(item)
+        print(item[:-6])
+        movie = ia.search_movie(item)
+        for item in movie:
+            print item['long imdb canonical title'], item.movieID
     return matching
 def download(csvlist, location):
     #print(data)
@@ -48,6 +51,7 @@ def download(csvlist, location):
         print(item)
         matching = [s for s in data if item.lower() in s.lower()]
     matching = match(matching)
+    return
     print(matching)
 
     for item in matching:
@@ -59,7 +63,6 @@ def download(csvlist, location):
             toput = location+'/'+item+'/'+sect
             print(toput)
             sftp.get(toget, toput, callback=printTotals)
-        break
 
 def main(argv):
     print(len(argv))
