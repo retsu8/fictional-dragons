@@ -12,7 +12,7 @@ transport = paramiko.Transport((host, port))
 
 username = "user"
 password = "2ebc42dc4e"
-transport.connect(username = username, password = password)
+transport.connect(username = username, password = password, compress=True)
 
 # Go!
 
