@@ -117,11 +117,18 @@ def upload(location):
                     item = filename
         except:
             print('Already done')
-        subprocess.run(['filebot', '-get-subtitles', path]) 
+        subprocess.run(['filebot', '-get-subtitles', path])
         subprocess.run(['filebot', '-script', 'fn:artwork.tmdb', path])
 
 def main(argv):
-    if len(argv) > 1:
+    opts = {}  # Empty dictionary to store key-value pairs.
+    while argv:  # While there are arguments left to parse...
+        if argv[0][0] == '-':  # Found a "-name value" pair.
+            opts[argv[0]] = argv[1]  # Add key and value to the dictionary.
+        argv = argv[1:]  # Reduce the argument list by copying it starting from index 1.
+
+    if len(opts) > 1:
+        if ()
         location = argv[1]
     else:
         location = os.getcwd()
