@@ -7,6 +7,8 @@
 ## from deluge_framework import filter_torrents
 ## filter_torrents(connection_data,torrent_info_wanted,action,interactive)
 # see bottom of script for details
+import logging, sys
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 from deluge.log import LOG as log
 from deluge.ui.client import client
@@ -89,7 +91,8 @@ def filter_torrents(connection_data={},info_wanted=[],action=(lambda tid,tinfo: 
     if 'name' not in info_wanted: info_wanted.append('name')
     # set parameters
     global cliconnect
-    cliconnect = client.connect(**connection_data)
+    print(connection_data)
+    cliconnect = client.connect('37.48.119.251', 58846, 'user', '2ebc42dc4e')
     global torrent_info_wanted
     torrent_info_wanted = info_wanted
     global torrentAction
