@@ -21,8 +21,8 @@ transport = paramiko.Transport((host, port))
 
 # Auth
 
-password = "dragon1991!"
-username = "retsu"
+password =os.environ("user")
+username = os.environ("pass")
 transport.connect(username = username, password = password)
 
 # Go!
